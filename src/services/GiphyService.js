@@ -1,5 +1,5 @@
 
-const GIPHY_API = ''
+const GIPHY_API = 'cuFLpei2cd24sAwUsfZTHZTPnETzsJR7'
 class GiphyService {
 	static async listGifs(onSuccess, onError, onFinal) {
 		try {
