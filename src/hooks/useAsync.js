@@ -33,7 +33,7 @@ export const useAsync = ({ asyncFunction, immediate = true }) => {
 			execute();
 		}
 	/**
-	 * Traced the issue from App.js by commenting out problem components and worked backwards to get here.
+	 * Victor: Traced the issue from App.js by commenting out problem components and worked backwards to get here.
 	 * Because we didn't specify a dependency to watch over in the useEffect, 
 	 * it was causing an infinite re-render-fetch cycle.
 	 */

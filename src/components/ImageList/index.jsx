@@ -8,12 +8,15 @@ export const ImageList = () => {
 	const { imageList, appStatus } = appState
 	const isAppLoading = appStatus === ASYNC_STATUS.PENDING
 
-	useAsync({asyncFunction: loadImageList})
+	useAsync({ asyncFunction: loadImageList })
 
 	return <div className='image-list'>
 		<LoadingSpinner isLoading={isAppLoading} >
 			{imageList?.map((image) => {
-				return <img key={image.id} src={image.images.original.url} alt={image.title} />
+				return <div className='image-card' key={image.id}>
+					{image.user ? <img className='avatar' src={image.user.avatar_url} alt={image.user.description} /> : null}
+					<img src={image.images.original.url} alt={image.title} />
+				</div>
 			})}
 		</LoadingSpinner>
 	</div>
