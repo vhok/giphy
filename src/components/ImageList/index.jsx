@@ -2,6 +2,7 @@ import { ASYNC_STATUS } from "../../constants/LoadingStates";
 import { useAppContext } from "../../context/appContext";
 import { useAsync } from "../../hooks/useAsync";
 import { LoadingSpinner } from "../LoadingSpinner";
+import { Avatar } from "../Avatar";
 import './ImageList.scss'
 export const ImageList = () => {
 	const { appState, loadImageList } = useAppContext()
@@ -12,12 +13,9 @@ export const ImageList = () => {
 
 	return <div className='image-list'>
 		<LoadingSpinner isLoading={isAppLoading} >
-			{imageList?.map((image) => {
-				return <div className='image-card' key={image.id}>
-					{image.user ? <img className='avatar' src={image.user.avatar_url} alt={image.user.description} /> : null}
-					<img src={image.images.original.url} alt={image.title} />
-				</div>
-			})}
+			{imageList?.map((image) => <Avatar user={image.user}>
+				<img src={image.images.original.url} alt={image.title} />
+			</Avatar>)}
 		</LoadingSpinner>
 	</div>
 }
