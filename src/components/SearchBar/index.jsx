@@ -4,12 +4,24 @@ import { useAppContext } from "../../context/appContext";
 import { useAsync } from "../../hooks/useAsync";
 export const SearchBar = () => {
 	const [searchValue, setSearchValue] = useState()
-	const {searchImageList} = useAppContext()
+	const {searchImageList, loadImageList} = useAppContext()
 	const handleSetSearchValue = (event) => {
 		setSearchValue(event.target.value)
 	}
 	const handleSearchGiphy = async () => {
-		await searchImageList({q: searchValue})
+		/**
+		 * Victor: Needed to check if a value exists to decide whether to use loadImageList
+		 * for trending or the searchImageList because they use different endpoints.
+		 */
+		try {
+			if(searchValue) {
+				await searchImageList({q: searchValue})
+			} else {
+				await loadImageList()
+			}
+		} catch(e) {
+			// handle error
+		}
 	}
 	const {execute: refreshList} = useAsync({asyncFunction: handleSearchGiphy, immediate:false})
 
